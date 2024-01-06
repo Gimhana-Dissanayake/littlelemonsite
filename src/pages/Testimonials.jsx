@@ -64,7 +64,7 @@ const testimonials3 = [
 
 const Testimonials = () => {
   return (
-    <section className="menu">
+    <section className="menu mb-3">
       <Container>
         <Row className="mt-5">
           {testimonials1.map((item) => (

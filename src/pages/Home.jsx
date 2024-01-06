@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import Hero from "../components/Hero";
 import WeeksSpecial from "../components/WeeksSpecial";
+import CarouselCustom from "../components/CarouselCustom";
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Container>
         <Hero />
         <WeeksSpecial />
+        <CarouselCustom />
       </Container>
     </section>
   );

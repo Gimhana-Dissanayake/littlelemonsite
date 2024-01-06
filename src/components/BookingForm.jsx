@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const BookingForm = () => {
+  useEffect(() => {
+    fetch(
+      "https://raw.githubusercontent.com/Meta-Front-End-Developer-PC/capstone/master/api.js"
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log("ERR: > ", err);
+      });
+  }, []);
+
   return (
     <form>
       <label for="res-date">Choose date</label>
