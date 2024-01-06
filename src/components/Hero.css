@@ -1,0 +1,25 @@
+.hero{
+    background-color: #186F65;
+    padding-top: 3rem;
+    padding-left: 2rem;
+    padding-bottom:2rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.hero__heading,.hero__sub-heading,.hero__description{
+    color:#fff;
+}
+
+
+.hero__hero-img-container{
+    position: relative;
+}
+
+.hero__hero-img{
+    position: absolute;
+    top:0;
+    left:7rem;
+    border-radius: .6rem;
+}
+

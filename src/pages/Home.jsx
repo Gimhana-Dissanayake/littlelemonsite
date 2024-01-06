@@ -1,14 +1,14 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import Hero from "../components/Hero";
+import WeeksSpecial from "../components/WeeksSpecial";
 
 const Home = () => {
   return (
     <section className="home">
       <Container>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores debitis
-        molestiae modi perferendis saepe vel. Quisquam, repudiandae praesentium
-        vel tempore dicta iste in eveniet veritatis labore aliquid, sequi, atque
-        minus.
+        <Hero />
+        <WeeksSpecial />
       </Container>
     </section>
   );

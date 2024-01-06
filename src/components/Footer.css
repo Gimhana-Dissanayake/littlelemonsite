@@ -1,4 +1,6 @@
 .footer{
-    background-color: yellow;
-    height: calc(150px - 57px)
+    background-color: #186F65;
+    height: calc(150px - 57px);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
 }
