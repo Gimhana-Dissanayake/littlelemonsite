@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import "./Footer.css";
+import { Container } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <footer>
-      Footer
-    </footer>
-  )
-}
+    <Container>
+      <footer className="footer">Footer</footer>
+    </Container>
+  );
+};
 
-export default Footer
+export default Footer;

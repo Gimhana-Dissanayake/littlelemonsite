@@ -1,0 +1,4 @@
+.footer{
+    background-color: yellow;
+    height: calc(150px - 57px)
+}
