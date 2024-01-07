@@ -1,14 +1,15 @@
 import React from "react";
-import BookingForm from "../components/BookingForm";
 import { Container } from "react-bootstrap";
+import { Outlet } from "react-router-dom";
 
-const Booking = () => {
+const Booking = (props) => {
   return (
-    <section className="booking">
+    <header className="pt-4">
       <Container>
-        <BookingForm />
+        <h1>Reservation | {props.step}</h1>
+        <Outlet />
       </Container>
-    </section>
+    </header>
   );
 };
 

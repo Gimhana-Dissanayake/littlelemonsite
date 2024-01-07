@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { Col, Row } from "react-bootstrap";
-import Avatar from "../components/Avatar";
+import Avatar from "./Avatar";
 import person1 from "../assets/person_1.jpg";
 import person2 from "../assets/person_2.jpg";
 import person3 from "../assets/person_3.jpg";
@@ -66,6 +66,7 @@ const Testimonials = () => {
   return (
     <section className="menu mb-3">
       <Container>
+        <h2>Testimonials</h2>
         <Row className="mt-5">
           {testimonials1.map((item) => (
             <Col sm={12} md={4}>

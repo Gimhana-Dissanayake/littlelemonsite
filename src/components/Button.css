@@ -1,7 +1,8 @@
-.button-styles{
-    background-color: #FCE09B;
-    border-radius: .6rem;
-    padding: .5rem;
-    outline: none;
-    border: none;
+.button-styles {
+  background-color: #fce09b;
+  border-radius: 0.6rem;
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  min-width: 5rem;
 }

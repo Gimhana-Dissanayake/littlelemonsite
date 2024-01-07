@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import "./About.css";
-import Testimonials from "./Testimonials";
+import Testimonials from "../components/Testimonials";
 
 const About = () => {
   return (
@@ -16,8 +16,8 @@ const About = () => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </p>
-        <Testimonials />
       </Container>
+      <Testimonials />
     </section>
   );
 };

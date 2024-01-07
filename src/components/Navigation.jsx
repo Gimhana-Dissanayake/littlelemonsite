@@ -22,9 +22,6 @@ const Navigation = () => {
             <Nav.Link>
               <NavLink to="/booking">Booking</NavLink>
             </Nav.Link>
-            <Nav.Link>
-              <NavLink to="/order-online">Order online</NavLink>
-            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

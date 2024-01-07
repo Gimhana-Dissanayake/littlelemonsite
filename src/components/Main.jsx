@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import About from "../pages/About";
 import Home from "../pages/Home";
-import Booking from "../pages/Booking";
 import OrderOnline from "../pages/OrderOnline";
+import Reservation from "./Reservation";
 
 const Main = () => {
   //TODO: STATE HERE
@@ -23,7 +23,7 @@ const Main = () => {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route path="/booking" element={<Booking />}></Route>
+        <Route path="/booking/*" element={<Reservation />}></Route>
         <Route path="/order-online" element={<OrderOnline />}></Route>
       </Routes>
     </main>
