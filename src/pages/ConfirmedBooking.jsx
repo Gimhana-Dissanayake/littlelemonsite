@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import "./BookingForm.css";
+import React, { useCallback, useEffect } from "react";
+
 import Form from "react-bootstrap/Form";
-import Button from "./Button";
+import Button from "../components/Button";
 import { Container } from "react-bootstrap";
 import { Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -12,21 +12,25 @@ const ConfirmedBooking = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    e.stopPropagation();
+    props.submitHandler();
   };
 
-  const moveBack = () => {
+  const moveBack = useCallback(() => {
     navigate("/booking");
     props.changeStepHandler("Basic Details");
+  }, [navigate, props]);
+
+  const navigateHome = () => {
+    navigate("/");
   };
 
   useEffect(() => {
     if (!props.firstStepValidated) {
       moveBack();
     }
-  }, []);
+  }, [props.firstStepValidated, moveBack]);
 
-  console.log("FFD > ", props.firstNameBlurHandler);
+  const buttonDisplay = !props.response || props.response.type === "error";
 
   return (
     <section className="pt-5">
@@ -42,7 +46,7 @@ const ConfirmedBooking = (props) => {
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label required>
                     First Name{" "}
-                    <FaStarOfLife size={10} className="text-danger" />
+                    <FaStarOfLife size={10} className="text-danger mb-1" />
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -59,7 +63,8 @@ const ConfirmedBooking = (props) => {
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label>
-                    Last Name <FaStarOfLife size={10} className="text-danger" />
+                    Last Name{" "}
+                    <FaStarOfLife size={10} className="text-danger mb-1" />
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -78,7 +83,8 @@ const ConfirmedBooking = (props) => {
               <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label>
-                    Email <FaStarOfLife size={10} className="text-danger" />
+                    Email{" "}
+                    <FaStarOfLife size={10} className="text-danger mb-1" />
                   </Form.Label>
                   <Form.Control
                     type="email"
@@ -97,7 +103,7 @@ const ConfirmedBooking = (props) => {
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label>
                     Phone Number{" "}
-                    <FaStarOfLife size={10} className="text-danger" />
+                    <FaStarOfLife size={10} className="text-danger mb-1" />
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -138,13 +144,17 @@ const ConfirmedBooking = (props) => {
                 </Form.Group>
               </Row>
 
-              <div className="d-flex justify-content-between">
+              <div
+                className={`${
+                  buttonDisplay ? "d-flex justify-content-between" : "d-none"
+                } `}
+              >
                 <Button
                   type="submit"
                   title="Submit"
                   style={{ border: "1px solid black" }}
                   className="px-3"
-                  loading={false}
+                  loading={props.isLoading}
                 />
                 <Button
                   type="button"
@@ -152,6 +162,20 @@ const ConfirmedBooking = (props) => {
                   style={{ border: "1px solid black" }}
                   className="px-3"
                   onClick={moveBack}
+                />
+              </div>
+
+              <div
+                className={`${
+                  !buttonDisplay ? "d-flex justify-content-end" : "d-none"
+                } `}
+              >
+                <Button
+                  type="button"
+                  title="Home"
+                  style={{ border: "1px solid black" }}
+                  className="px-3"
+                  onClick={navigateHome}
                 />
               </div>
             </Form>

@@ -1,7 +1,6 @@
 import React, { forwardRef } from "react";
-import "./BookingForm.css";
 import Form from "react-bootstrap/Form";
-import Button from "./Button";
+import Button from "../components/Button";
 import { Container } from "react-bootstrap";
 import { Col, Row } from "react-bootstrap";
 import DatePicker from "react-datepicker";
@@ -55,7 +54,7 @@ const BookingForm = (props) => {
               <Row className="mb-3">
                 <Form.Group as={Col} md="6" controlId="validationCustom01">
                   <Form.Label>
-                    Date <FaStarOfLife size={10} className="text-danger" />
+                    Date <FaStarOfLife size={10} className="text-danger mb-1" />
                   </Form.Label>
                   <div className="custom-input-for-date-time">
                     <DatePicker
@@ -73,7 +72,7 @@ const BookingForm = (props) => {
                 </Form.Group>
                 <Form.Group as={Col} md="6" controlId="validationCustom02">
                   <Form.Label>
-                    Time <FaStarOfLife size={10} className="text-danger" />
+                    Time <FaStarOfLife size={10} className="text-danger mb-1" />
                   </Form.Label>
                   <div className="custom-input-for-date-time">
                     <DatePicker
@@ -97,7 +96,8 @@ const BookingForm = (props) => {
               <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridState" md="6">
                   <Form.Label>
-                    Occation <FaStarOfLife size={10} className="text-danger" />
+                    Occation{" "}
+                    <FaStarOfLife size={10} className="text-danger mb-1" />
                   </Form.Label>
                   <Form.Select
                     defaultValue="Select occation"
@@ -120,7 +120,7 @@ const BookingForm = (props) => {
                 <Form.Group as={Col} controlId="formGridState" md="6">
                   <Form.Label>
                     Number of Diners{" "}
-                    <FaStarOfLife size={10} className="text-danger" />
+                    <FaStarOfLife size={10} className="text-danger mb-1" />
                   </Form.Label>
                   <Form.Select
                     defaultValue="Select dinners"
@@ -150,7 +150,8 @@ const BookingForm = (props) => {
               </Row>
               <Form.Group as={Row} className="mb-3">
                 <Form.Label as="legend" column sm={2}>
-                  Seating <FaStarOfLife size={10} className="text-danger" />
+                  Seating{" "}
+                  <FaStarOfLife size={10} className="text-danger mb-1" />
                 </Form.Label>
                 <Col sm={5} className="pt-2">
                   <Form.Check

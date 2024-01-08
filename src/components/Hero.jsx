@@ -12,7 +12,9 @@ const Hero = () => {
     <article className="hero">
       <Row>
         <Col md={6} xs={12}>
-          <h1 className="hero__heading">Little Lemon</h1>
+          <h1 className="hero__heading" data-test-id="little-lemon-text">
+            Little Lemon
+          </h1>
           <h3 className="hero__sub-heading">Chicago</h3>
           <p className="hero__description">
             We are a family owned Mediterranean restaurant, focused on
@@ -35,7 +37,7 @@ const Hero = () => {
             className="hero__hero-img"
             src={heroImg}
             width={260}
-            alt="image"
+            alt="hero-img"
           ></img>
         </Col>
       </Row>

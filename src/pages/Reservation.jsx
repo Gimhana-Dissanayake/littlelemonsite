@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Booking from "../pages/Booking";
-import BookingForm from "./BookingForm";
-import ConfirmedBooking from "./ConfirmedBooking";
+import Booking from "../layouts/Booking";
+
 import {
+  dateErrorMessage,
+  dinerErrorMessage,
+  emailErrorMessage,
+  firstNameErrorMessage,
   isSlotTaken,
+  lastNameErrorMessage,
+  occationErrorMessage,
+  phoneNumberErrorMessage,
+  seatingErrorMessage,
+  slotTakenErrorMsg,
+  specialRequestsErrorMessage,
+  timeErrorMessage,
   validEmail,
   validateDate,
   validateDiner,
@@ -18,6 +28,9 @@ import {
   validateSpecialRequests,
   validateTime,
 } from "../utils";
+import useSubmit from "../hooks/useSubmit";
+import BookingForm from "./BookingForm";
+import ConfirmedBooking from "./ConfirmedBooking";
 
 const Reservation = () => {
   const navigate = useNavigate();
@@ -25,6 +38,8 @@ const Reservation = () => {
   const changeStepHandler = (step) => {
     setStep(step);
   };
+
+  const { isLoading, response, submit } = useSubmit();
 
   const slots = [
     {
@@ -86,7 +101,7 @@ const Reservation = () => {
   };
 
   const dateBlurHandler = () => {
-    const msg = validateDate(state.date) ? "" : "Please select a valid date";
+    const msg = dateErrorMessage(state.date);
     setState((ps) => ({
       ...ps,
       dateError: msg,
@@ -113,7 +128,7 @@ const Reservation = () => {
   };
 
   const timeBlurHandler = () => {
-    const msg = validateDate(state.time) ? "" : "Please select a valid time";
+    const msg = timeErrorMessage(state.time);
     setState((ps) => ({
       ...ps,
       timeError: msg,
@@ -139,9 +154,7 @@ const Reservation = () => {
   };
 
   const occationBlurHandler = () => {
-    const msg = validateOccation(state.occation)
-      ? ""
-      : "Please select an occation";
+    const msg = occationErrorMessage(state.occation);
     setState((ps) => ({
       ...ps,
       occationError: msg,
@@ -167,9 +180,7 @@ const Reservation = () => {
   };
 
   const changeDinersBlurHandler = () => {
-    const msg = validateDiner(state.diners)
-      ? ""
-      : "Please select number of diners";
+    const msg = dinerErrorMessage(state.diners);
     setState((ps) => ({
       ...ps,
       dinersError: msg,
@@ -195,9 +206,7 @@ const Reservation = () => {
   };
 
   const seatingBlurHandler = () => {
-    const msg = validateSeating(state.seating)
-      ? ""
-      : "Please select number of diners";
+    const msg = seatingErrorMessage(state.seating);
     setState((ps) => ({
       ...ps,
       seatingError: msg,
@@ -230,29 +239,27 @@ const Reservation = () => {
       !isTimeTaken;
 
     if (!validDate) {
-      changeDateErrorHandler("Please select a valid date");
+      changeDateErrorHandler(dateErrorMessage(state.date));
     }
 
     if (!validTime) {
-      changeTimeErrorHandler("Please select a valid time");
+      changeTimeErrorHandler(timeErrorMessage(state.date));
     }
 
     if (isTimeTaken) {
-      changeTimeErrorHandler(
-        "The selected time slot for the given date is taken!"
-      );
+      changeTimeErrorHandler(slotTakenErrorMsg(state.date, state.time, slots));
     }
 
     if (!validOccation) {
-      changeOccationErrorHandler("Please select an occation");
+      changeOccationErrorHandler(occationErrorMessage(state.occation));
     }
 
     if (!validDiners) {
-      changeDinersErrorHandler("Please select number of diners");
+      changeDinersErrorHandler(dinerErrorMessage(state.diners));
     }
 
     if (!validSeating) {
-      changeSeatingErrorHandler("Please select preffered seating");
+      changeSeatingErrorHandler(seatingErrorMessage(state.seating));
     }
 
     if (validity) {
@@ -261,8 +268,6 @@ const Reservation = () => {
       changeStepHandler("Confirmation");
     }
   };
-
-  console.log("STATE> : ", state);
 
   const confirmationSubmitHandler = () => {
     const validFirstName = validateFirstName(state.firstName);
@@ -279,6 +284,65 @@ const Reservation = () => {
     const validPhoneNumberLength = validatePhoneNumberLength(state.phoneNumber);
 
     const validSpecialRequest = validateSpecialRequests(state.specialRequests);
+
+    const validity =
+      validFirstName &&
+      validFirstNameCharLength &&
+      validLastName &&
+      validLastNameCharLength &&
+      valEmail &&
+      validPhoneNumberChars &&
+      validPhoneNumberLength &&
+      validSpecialRequest;
+
+    const firstNameErrorMsg = firstNameErrorMessage(state.firstName);
+
+    if (firstNameErrorMsg) {
+      firstNameErrorHandler(firstNameErrorMsg);
+    }
+
+    const lastNameErrorMsg = lastNameErrorMessage(state.lastName);
+
+    if (lastNameErrorMsg) {
+      lastNameErrorHandler(lastNameErrorMsg);
+    }
+
+    const emailErrorMsg = emailErrorMessage(state.email);
+
+    if (emailErrorMsg) {
+      emailErrorHandler(emailErrorMsg);
+    }
+
+    const phoneNumberErrorMsg = phoneNumberErrorMessage(state.phoneNumber);
+
+    if (phoneNumberErrorMsg) {
+      phoneNumberErrorHandler(phoneNumberErrorMsg);
+    }
+
+    const specialRequestMsg = specialRequestsErrorMessage(
+      state.specialRequests
+    );
+
+    if (specialRequestMsg) {
+      specialRequestsErrorHandler(specialRequestMsg);
+    }
+
+    if (validity) {
+      const payload = {
+        date: state.date,
+        time: state.time,
+        occation: state.occation,
+        diners: state.diners,
+        seating: state.seating,
+        firstName: state.firstName,
+        lastName: state.lastName,
+        email: state.email,
+        phoneNumber: state.phoneNumber,
+        specialRequest: state.specialRequests,
+      };
+
+      submit("submitUrl", payload);
+    }
   };
 
   //Firstname
@@ -291,20 +355,9 @@ const Reservation = () => {
   };
 
   const firstNameBlurHandler = () => {
-    const validFirstName = validateFirstName(state.firstName);
-    const validFirstNameCharLength = validateFirstNameCharLength(
-      state.firstName
-    );
-
-    console.log("FIRRED");
-
     setState((ps) => ({
       ...ps,
-      firstNameError: !validFirstName
-        ? "First name cannot be empty"
-        : !validFirstNameCharLength
-        ? "First name should exceed 50 characters"
-        : "",
+      firstNameError: firstNameErrorMessage(state.firstName),
     }));
   };
 
@@ -327,16 +380,9 @@ const Reservation = () => {
   };
 
   const lastNameBlurHandler = () => {
-    const validLastName = validateLastName(state.lastName);
-    const validLastNameCharLength = validateFirstNameCharLength(state.lastName);
-
     setState((ps) => ({
       ...ps,
-      lastNameError: !validLastName
-        ? "Last name cannot be empty"
-        : !validLastNameCharLength
-        ? "Last name should exceed 50 characters"
-        : "",
+      lastNameError: lastNameErrorMessage(state.lastName),
     }));
   };
 
@@ -359,10 +405,9 @@ const Reservation = () => {
   };
 
   const emailBlurHandler = () => {
-    const valEmail = validEmail(state.email);
     setState((ps) => ({
       ...ps,
-      emailError: !valEmail ? "Provide a valid email" : "",
+      emailError: emailErrorMessage(state.email),
     }));
   };
 
@@ -385,16 +430,9 @@ const Reservation = () => {
   };
 
   const phoneNumberBlurHandler = () => {
-    const validPhoneNumberChars = validatePhoneNumber(state.phoneNumber);
-    const validPhoneNumberLength = validatePhoneNumberLength(state.phoneNumber);
-
     setState((ps) => ({
       ...ps,
-      phoneNumberError: !validPhoneNumberChars
-        ? "Provide a valid phone number"
-        : !validPhoneNumberLength
-        ? "Phone number cannot exceed 15 characters"
-        : "",
+      phoneNumberError: phoneNumberErrorMessage(state.phoneNumber),
     }));
   };
 
@@ -418,12 +456,9 @@ const Reservation = () => {
   };
 
   const specialRequestsBlurHandler = () => {
-    const validSpecialRequest = validateSpecialRequests(state.specialRequests);
     setState((ps) => ({
       ...ps,
-      specialRequestsError: !validSpecialRequest
-        ? "Special requests cannot exceed 100 characters"
-        : "",
+      specialRequestsError: specialRequestsErrorMessage(state.specialRequests),
     }));
   };
 
@@ -438,7 +473,7 @@ const Reservation = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Booking step={step} />}>
+      <Route path="/" element={<Booking step={step} response={response} />}>
         <Route
           index
           element={
@@ -490,6 +525,7 @@ const Reservation = () => {
               emailBlurHandler={emailBlurHandler}
               phoneNumberBlurHandler={phoneNumberBlurHandler}
               specialRequestsBlurHandler={specialRequestsBlurHandler}
+              submitHandler={confirmationSubmitHandler}
               firstName={state.firstName}
               lastName={state.lastName}
               email={state.email}
@@ -500,6 +536,8 @@ const Reservation = () => {
               emailError={state.emailError}
               phoneNumberError={state.phoneNumberError}
               specialRequestsError={state.specialRequestsError}
+              isLoading={isLoading}
+              response={response}
             />
           }
         />

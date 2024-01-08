@@ -1,23 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import About from "../pages/About";
 import Home from "../pages/Home";
 import OrderOnline from "../pages/OrderOnline";
-import Reservation from "./Reservation";
+import Reservation from "../pages/Reservation";
 
 const Main = () => {
-  //TODO: STATE HERE
-
-  const [availableTimes, setAvailableTimes] = useState();
-
-  const updateTimes = () => {};
-
-  const initializeTImes = () => {
-    // TODO: reset avialble times
-  };
-
-  //use reducer function
-
   return (
     <main className="main">
       <Routes>

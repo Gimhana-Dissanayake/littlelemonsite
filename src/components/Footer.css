@@ -1,6 +1,7 @@
-.footer{
-    background-color: #186F65;
-    height: calc(150px - 57px);
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+.footer {
+  background-color: #186f65;
+  height: calc(150px - 57px);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  margin-top: 2rem;
 }

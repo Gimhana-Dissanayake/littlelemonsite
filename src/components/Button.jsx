@@ -6,7 +6,11 @@ const Button = (props) => {
   return (
     <button
       className={`${props.className} button-styles `}
-      onClick={props.onClick}
+      onClick={() => {
+        if (!props.loading) {
+          props?.onClick && props?.onClick();
+        }
+      }}
       type={props.type || "button"}
       style={props.style}
     >

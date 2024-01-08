@@ -66,10 +66,10 @@ const Testimonials = () => {
   return (
     <section className="menu mb-3">
       <Container>
-        <h2>Testimonials</h2>
+        <h2 data-testid="testimonials-header">Testimonials</h2>
         <Row className="mt-5">
-          {testimonials1.map((item) => (
-            <Col sm={12} md={4}>
+          {testimonials1.map((item, index) => (
+            <Col sm={12} md={4} key={index}>
               <Card>
                 <Card.Body>
                   <div className="d-flex align-items-center">
@@ -93,8 +93,8 @@ const Testimonials = () => {
           ))}
         </Row>
         <Row className="mt-4">
-          {testimonials2.map((item) => (
-            <Col sm={12} md={4}>
+          {testimonials2.map((item, index) => (
+            <Col sm={12} md={4} key={index}>
               <Card>
                 <Card.Body>
                   <div className="d-flex align-items-center">
@@ -118,8 +118,8 @@ const Testimonials = () => {
           ))}
         </Row>
         <Row className="mt-4">
-          {testimonials3.map((item) => (
-            <Col sm={12} md={4}>
+          {testimonials3.map((item, index) => (
+            <Col sm={12} md={4} key={index}>
               <Card>
                 <Card.Body>
                   <div className="d-flex align-items-center">
